@@ -15,8 +15,9 @@ const Home = () => {
       <UpcomingOperations />
       <NewToAirsoft />
       <TacticalMarketplace />
-      <FieldIntelligence />
       <AirsoftArenaSubscriptions />
+      <FieldIntelligence />
+      
     </>
   );
 };
