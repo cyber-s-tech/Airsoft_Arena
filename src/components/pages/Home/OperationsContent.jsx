@@ -1,9 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 import { FaCalendarAlt, FaMapMarkerAlt, FaUsers } from "react-icons/fa";
 import { FaLocationCrosshairs } from "react-icons/fa6";
 import { HiChartBar } from "react-icons/hi2";
 import { FiSearch } from "react-icons/fi";
+import API from "../../../Api/Api";
 
 const tabs = [
   "ALL OPERATIONS",
@@ -14,7 +15,7 @@ const tabs = [
   "COMPETITIVE",
 ];
 
-const UpcomingOperations = () => {
+const OperationsContent = () => {
   const [operations, setOperations] = useState([]);
   const [activeTab, setActiveTab] = useState("ALL OPERATIONS");
   const [search, setSearch] = useState("");
