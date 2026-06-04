@@ -1,11 +1,16 @@
 import React, { useEffect, useState } from "react";
 import API from "../../../Api/Api";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Navigation } from "swiper/modules";
+
+import "swiper/css";
+import "swiper/css/navigation";
 
 const TacticalMarketplace = () => {
   const [products, setProducts] = useState([]);
   const [categories, setCategories] = useState([]);
   const [activeCat, setActiveCat] = useState("all");
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(true); 
 
   useEffect(() => {
     const fetchData = async () => {
@@ -30,9 +35,7 @@ const TacticalMarketplace = () => {
   const filteredProducts =
     activeCat === "all"
       ? products
-      : products.filter((product) =>
-          product.product_cat?.includes(activeCat)
-        );
+      : products.filter((product) => product.product_cat?.includes(activeCat));
 
   return (
     <section className="w-full bg-[#080b0c] py-20 font-['Chakra_Petch']">
@@ -67,21 +70,21 @@ const TacticalMarketplace = () => {
               All Products
             </button>
 
-{categories
-  .filter((cat) => cat.slug !== "uncategorized")
-  .map((cat) => (
-    <button
-      key={cat.id}
-      onClick={() => setActiveCat(cat.id)}
-      className={`px-7 py-5 uppercase text-sm tracking-wider whitespace-nowrap transition-all ${
-        activeCat === cat.id
-          ? "bg-[#6f8d5c] text-white"
-          : "text-[#8c8c8c] hover:text-white"
-      }`}
-    >
-      {cat.name}
-    </button>
-))}
+            {categories
+              .filter((cat) => cat.slug !== "uncategorized")
+              .map((cat) => (
+                <button
+                  key={cat.id}
+                  onClick={() => setActiveCat(cat.id)}
+                  className={`px-7 py-5 uppercase text-sm tracking-wider whitespace-nowrap transition-all ${
+                    activeCat === cat.id
+                      ? "bg-[#6f8d5c] text-white"
+                      : "text-[#8c8c8c] hover:text-white"
+                  }`}
+                >
+                  {cat.name}
+                </button>
+              ))}
           </div>
         </div>
 
@@ -91,70 +94,84 @@ const TacticalMarketplace = () => {
             Loading Products...
           </div>
         ) : (
-          <div className="grid lg:grid-cols-3 md:grid-cols-2 gap-8 mt-14">
+          <Swiper
+            modules={[Navigation]}
+            navigation
+            spaceBetween={30}
+            slidesPerView={3}
+            breakpoints={{
+              320: {
+                slidesPerView: 1,
+              },
+              768: {
+                slidesPerView: 2,
+              },
+              1200: {
+                slidesPerView: 3,
+              },
+            }}
+            className="mt-14 tactical-swiper"
+          >
             {filteredProducts.map((product) => {
               const image =
                 product._embedded?.["wp:featuredmedia"]?.[0]?.source_url ||
                 "/placeholder.jpg";
 
               const features =
-                product.acf?.features
-                  ?.split(",")
-                  .map((item) => item.trim()) || [];
+                product.acf?.features?.split(",").map((item) => item.trim()) ||
+                [];
 
               return (
-                <div key={product.id} className="group">
-                  {/* Image */}
-                  <div className="relative overflow-hidden">
-                    <img
-                      src={image}
-                      alt={product.title.rendered}
-                      className="w-full h-[420px] object-cover transition duration-500 group-hover:scale-105"
-                    />
+                <SwiperSlide key={product.id}>
+                  <div className="group">
+                    <div className="relative overflow-hidden">
+                      <img
+                        src={image}
+                        alt={product.title.rendered}
+                        className="w-full h-[420px] object-cover transition duration-500 group-hover:scale-105"
+                      />
 
-                    <div className="absolute top-4 left-4 bg-[#6f8d5c] text-white text-xs uppercase px-3 py-2">
-                      {product.acf?.brand_name}
-                    </div>
-                  </div>
-
-                  {/* Content */}
-                  <div className="mt-5">
-                    <div className="border-l-2 border-[#5E7D4D] pl-3 text-[#5E7D4D] uppercase text-sm">
-                      {product.acf?.product_subtitle}
+                      <div className="absolute top-4 left-4 bg-[#6f8d5c] text-white text-xs uppercase px-3 py-2">
+                        {product.acf?.brand_name}
+                      </div>
                     </div>
 
-                    <h3 className="mt-4 text-white text-[24px] font-bold uppercase leading-[1.5] min-h-[110px]">
-                      {product.title.rendered}
-                    </h3>
-
-                    <div className="border-t border-[#1b2220] mt-6 pt-6 flex items-center justify-between">
-                      <div className="text-[#5E7D4D] text-[42px] font-bold">
-                        $
-                        {product.meta?._price ||
-                          product.meta?.price ||
-                          "145"}
+                    <div className="mt-5">
+                      <div className="border-l-2 border-[#5E7D4D] pl-3 text-[#5E7D4D] uppercase text-sm">
+                        {product.acf?.product_subtitle}
                       </div>
 
-                      <button className="border border-[#5d5d5d] px-8 py-4 uppercase text-white hover:bg-[#6f8d5c] hover:border-[#6f8d5c] transition">
-                        Add To Cart
-                      </button>
-                    </div>
+                      <h3 className="mt-4 text-white text-[30px] font-bold uppercase leading-[1.5] min-h-[110px]">
+                        {product.title.rendered}
+                      </h3>
 
-                    <div className="border-t border-[#1b2220] mt-6 pt-5 flex flex-wrap gap-2">
-                      {features.map((feature, index) => (
-                        <span
-                          key={index}
-                          className="bg-[#4d613e] text-[#d5d5d5] text-[11px] uppercase px-3 py-2"
-                        >
-                          {feature}
-                        </span>
-                      ))}
+                      <div className="border-t border-[#1b2220] pt-3 flex items-center justify-between">
+                        <div className="text-[#5E7D4D] text-[42px] font-bold">
+                          $
+                          {product.meta?._price || product.meta?.price || "145"}
+                        </div>
+
+                        <button className="border border-[#5d5d5d] px-8 py-4 uppercase text-white hover:bg-[#6f8d5c] transition">
+                          Add To Cart
+                        </button>
+                      </div>
+
+                      <div className="border-t border-[#1b2220] mt-6 pt-5 flex flex-wrap gap-2">
+                        {features.map((feature, index) => (
+                          <span
+                            key={index}
+                            className="bg-[#4d613e] text-[#d5d5d5] text-[11px] uppercase px-3 py-2"
+                          >
+                            {feature}
+                          </span>
+                        ))}
+                      </div>
                     </div>
                   </div>
-                </div>
+                </SwiperSlide>
               );
             })}
-          </div>
+          </Swiper>
         )}
 
         {/* Button */}
