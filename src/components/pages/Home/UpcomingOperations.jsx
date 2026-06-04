@@ -7,7 +7,6 @@ import { HiChartBar } from "react-icons/hi2";
 import { FiSearch } from "react-icons/fi";
 import AirsoftArenaSubscriptions from "./AirsoftArenaSubscriptions";
 
-
 const tabs = [
   "ALL OPERATIONS",
   "CQB",
@@ -71,21 +70,15 @@ const UpcomingOperations = () => {
       <div className="max-w-[1440px] mx-auto px-5 xl:px-[80px]">
         {/* HEADING */}
         <div className="max-w-[900px] mx-auto text-center">
-          <span
-            className=" block text-[14px] font-semibold uppercase tracking-wide text-[#7C8761]"
-          >
+          <span className=" block text-[14px] font-semibold uppercase tracking-wide text-[#7C8761]">
             // ACTIVE DEPLOYMENTS //
           </span>
 
-          <h2
-            className=" mt-4 text-[32px] md:text-[40px] xl:text-[45px] font-bold uppercase leading-tight text-[#5E7D4D]"
-          >
+          <h2 className=" mt-4 text-[32px] md:text-[40px] xl:text-[45px] font-bold uppercase leading-tight text-[#5E7D4D]">
             Upcoming Operations
           </h2>
 
-          <p
-            className=" mt-4 max-w-[700px] mx-auto text-[20px] font-medium leading-[1.8] text-white"
-          >
+          <p className=" mt-4 max-w-[700px] mx-auto text-[20px] font-medium leading-[1.8] text-white">
             Join immersive milsim scenarios, CQB operations and tactical
             training events with the community.
           </p>
@@ -123,10 +116,11 @@ const UpcomingOperations = () => {
         rounded-[5px]
         cursor-pointer
 
-        ${activeTab === tab
-                    ? "bg-[#5E7D4D] text-white"
-                    : "bg-transparent text-[#8A8A8A] hover:text-white"
-                  }
+        ${
+          activeTab === tab
+            ? "bg-[#5E7D4D] text-white"
+            : "bg-transparent text-[#8A8A8A] hover:text-white"
+        }
       `}
               >
                 {tab}
@@ -136,7 +130,8 @@ const UpcomingOperations = () => {
 
           {/* SEARCH */}
           <div className="relative w-full md:w-[280px]">
-            <FiSearch size={25}
+            <FiSearch
+              size={25}
               className="
       absolute
       left-4
