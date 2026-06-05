@@ -280,14 +280,21 @@ const Header = () => {
           <ul className="flex flex-col gap-5">
             {navItems.map((item, index) => (
               <li key={item}>
-                <button
-                  className={`text-left text-[16px] uppercase cursor-pointer transition-all duration-300 hover:scale-105 ${index === 0
-                    ? "font-bold text-[#5E7D4D]"
-                    : "font-medium text-[#FFFFFF80]"
-                    }`}
-                >
-                  {item}
-                </button>
+                {index === 0 ? (
+                  <Link
+                    to="/"
+                    onClick={() => setMenuOpen(false)}
+                    className="text-left text-[16px] uppercase cursor-pointer transition-all duration-300 hover:scale-105 font-bold text-[#5E7D4D]"
+                  >
+                    {item}
+                  </Link>
+                ) : (
+                  <button
+                    className="text-left text-[16px] uppercase cursor-pointer transition-all duration-300 hover:scale-105 font-medium text-[#FFFFFF80]"
+                  >
+                    {item}
+                  </button>
+                )}
               </li>
             ))}
           </ul>
