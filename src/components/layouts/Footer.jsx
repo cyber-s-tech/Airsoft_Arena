@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import {
   FaFacebookF,
   FaInstagram,
@@ -38,7 +39,7 @@ const Footer = () => {
       icon: <FaInstagram size={25} />,
       link: "#",
     },
-    
+
     {
       icon: <FaYoutube size={25} />,
       link: "#",
@@ -116,7 +117,17 @@ const Footer = () => {
           <div className="w-full h-px bg-[#7C876180] my-12 lg:my-16" />
 
           {/* Row 02 */}
-          <div className="flex flex-col lg:flex-row gap-12 xl:gap-[214px]">
+          <div
+            className="
+    grid
+    grid-cols-1
+    md:grid-cols-2
+    lg:flex
+    lg:flex-row
+    gap-12
+    xl:gap-[214px]
+  "
+          >
             {/* Company Links */}
             <div>
               <h4 className="text-[#7C8761] text-[22px] md:text-[25px] font-semibold uppercase">
@@ -126,12 +137,26 @@ const Footer = () => {
               <ul className="mt-6 flex flex-col gap-8">
                 {companyLinks.map((item) => (
                   <li key={item}>
-                    <a href="#" className=" text-[16px] font-medium text-[#FFFFFF80]
-                        inline-block transition-all duration-300 hover:text-white
-                        hover:translate-x-2"
-                    >
-                      {item}
-                    </a>
+                    {item === "HOME" ? (
+                      <Link
+                        to="/"
+                        onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+                        className="text-[16px] font-medium text-[#FFFFFF80]
+  inline-block transition-all duration-300 hover:text-white
+  hover:translate-x-2"
+                      >
+                        {item}
+                      </Link>
+                    ) : (
+                      <a
+                        href="#"
+                        className="text-[16px] font-medium text-[#FFFFFF80]
+        inline-block transition-all duration-300 hover:text-white
+        hover:translate-x-2"
+                      >
+                        {item}
+                      </a>
+                    )}
                   </li>
                 ))}
               </ul>
@@ -159,11 +184,11 @@ const Footer = () => {
             {/* Right Image */}
             <div className="flex-1 flex justify-center lg:justify-end">
               {/* Replace with image later */}
-              { <img
+              {<img
                 src={footerImage}
                 alt="Footer Visual"
                 className="max-w-full h-auto object-contain"
-              /> }
+              />}
 
               <div
                 className=" w-full max-w-[450px] h-[250px] flex items-center justify-center

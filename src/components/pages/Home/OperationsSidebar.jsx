@@ -82,7 +82,7 @@ const OperationsSidebar = () => {
                             </p>
 
                             <h3
-                                className=" text-[40px] leading-none font-bold text-[#5E7D4D] mt-2 "
+                                className=" text-[40px] lg:text-[32px] leading-none font-bold text-[#5E7D4D] mt-2 "
                             >
                                 {item.value}
                             </h3>

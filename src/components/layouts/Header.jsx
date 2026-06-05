@@ -128,10 +128,13 @@ const Header = () => {
             {/* Mobile / Tablet Header */}
             <div className="flex lg:hidden items-center justify-between w-full">
               {/* Logo */}
-              <div className="text-[24px] font-bold leading-none text-white whitespace-nowrap cursor-pointer transition-all duration-300 hover:scale-105">
+              <Link
+                to="/"
+                className="text-[28px] font-bold leading-none text-white whitespace-nowrap cursor-pointer transition-all duration-300 hover:scale-105"
+              >
                 <span className="text-[#5E7D4D]">AIRSOFT</span>{" "}
                 <span>ARENA</span>
-              </div>
+              </Link>
 
               {/* Hamburger */}
               <button
@@ -162,58 +165,58 @@ const Header = () => {
 
           {/* Mobile Search */}
           <div className="lg:hidden pb-4">
-  <div className="relative">
-    <div className="h-[50px] border border-[#2A2D2F] flex items-center px-4">
-      <FiSearch size={18} className="text-[#5E7D4D] shrink-0" />
+            <div className="relative">
+              <div className="h-[50px] border border-[#2A2D2F] flex items-center px-4">
+                <FiSearch size={18} className="text-[#5E7D4D] shrink-0" />
 
-      <input
-        type="text"
-        value={search}
-        onChange={(e) => setSearch(e.target.value)}
-        onFocus={() => setShowResults(true)}
-        placeholder="Search products..."
-        className="ml-3 w-full bg-transparent outline-none text-white placeholder:text-[#FFFFFF66] text-[16px] font-medium"
-      />
-    </div>
-
-    {showResults && searchResults.length > 0 && (
-      <div className="absolute top-[55px] left-0 w-full bg-[#111] border border-[#2A2D2F] z-[9999] max-h-[350px] overflow-y-auto">
-        {searchResults.map((product) => {
-          const image =
-            product._embedded?.["wp:featuredmedia"]?.[0]?.source_url;
-
-          return (
-            <Link
-              key={product.id}
-              to={`/product/${product.slug}`}
-              onClick={() => {
-                setSearch("");
-                setShowResults(false);
-              }}
-              className="flex items-center gap-3 p-3 border-b border-[#222] hover:bg-[#1a1a1a]"
-            >
-              <img
-                src={image}
-                alt={product.title.rendered}
-                className="w-12 h-12 object-cover"
-              />
-
-              <div>
-                <h4 className="text-white text-sm font-semibold uppercase">
-                  {product.title.rendered}
-                </h4>
-
-                <p className="text-[#7C8761] text-xs uppercase">
-                  {product.acf?.brand_name}
-                </p>
+                <input
+                  type="text"
+                  value={search}
+                  onChange={(e) => setSearch(e.target.value)}
+                  onFocus={() => setShowResults(true)}
+                  placeholder="Search products..."
+                  className="ml-3 w-full bg-transparent outline-none text-white placeholder:text-[#FFFFFF66] text-[16px] font-medium"
+                />
               </div>
-            </Link>
-          );
-        })}
-      </div>
-    )}
-  </div>
-</div>
+
+              {showResults && searchResults.length > 0 && (
+                <div className="absolute top-[55px] left-0 w-full bg-[#111] border border-[#2A2D2F] z-[9999] max-h-[350px] overflow-y-auto">
+                  {searchResults.map((product) => {
+                    const image =
+                      product._embedded?.["wp:featuredmedia"]?.[0]?.source_url;
+
+                    return (
+                      <Link
+                        key={product.id}
+                        to={`/product/${product.slug}`}
+                        onClick={() => {
+                          setSearch("");
+                          setShowResults(false);
+                        }}
+                        className="flex items-center gap-3 p-3 border-b border-[#222] hover:bg-[#1a1a1a]"
+                      >
+                        <img
+                          src={image}
+                          alt={product.title.rendered}
+                          className="w-12 h-12 object-cover"
+                        />
+
+                        <div>
+                          <h4 className="text-white text-sm font-semibold uppercase">
+                            {product.title.rendered}
+                          </h4>
+
+                          <p className="text-[#7C8761] text-xs uppercase">
+                            {product.acf?.brand_name}
+                          </p>
+                        </div>
+                      </Link>
+                    );
+                  })}
+                </div>
+              )}
+            </div>
+          </div>
 
           {/* Divider */}
           <div className="w-full h-px bg-white/20" />
@@ -226,15 +229,21 @@ const Header = () => {
             >
               {navItems.map((item, index) => (
                 <li key={item}>
-                  <button
-                    className={`text-[16px] uppercase whitespace-nowrap cursor-pointer transition-all duration-300 hover:scale-105 ${
-                      index === 0
-                        ? "font-bold text-[#5E7D4D]"
-                        : "font-medium text-[#FFFFFF80] hover:text-white"
-                    }`}
-                  >
-                    {item}
-                  </button>
+                  {index === 0 ? (
+                    <Link
+                      to="/"
+                      onClick={() => setMenuOpen(false)}
+                      className="text-left text-[16px] uppercase cursor-pointer transition-all duration-300 hover:scale-105 font-bold text-[#5E7D4D]"
+                    >
+                      {item}
+                    </Link>
+                  ) : (
+                    <button
+                      className="text-left text-[16px] uppercase cursor-pointer transition-all duration-300 hover:scale-105 font-medium text-[#FFFFFF80]"
+                    >
+                      {item}
+                    </button>
+                  )}
                 </li>
               ))}
             </ul>
@@ -245,16 +254,14 @@ const Header = () => {
       {/* Overlay */}
       <div
         onClick={() => setMenuOpen(false)}
-        className={`fixed inset-0 bg-black/60 z-40 transition-all duration-300 ${
-          menuOpen ? "opacity-100 visible" : "opacity-0 invisible"
-        }`}
+        className={`fixed inset-0 bg-black/60 z-40 transition-all duration-300 ${menuOpen ? "opacity-100 visible" : "opacity-0 invisible"
+          }`}
       />
 
       {/* Off Canvas Menu */}
       <div
-        className={`fixed top-0 right-0 h-screen w-[320px] bg-[#0B0D0E] z-50 transform transition-transform duration-300 ease-in-out ${
-          menuOpen ? "translate-x-0" : "translate-x-full"
-        }`}
+        className={`fixed top-0 right-0 h-screen w-[320px] bg-[#0B0D0E] z-50 transform transition-transform duration-300 ease-in-out ${menuOpen ? "translate-x-0" : "translate-x-full"
+          }`}
       >
         {/* Drawer Header */}
         <div className="flex items-center justify-between p-5 border-b border-white/20">
@@ -274,11 +281,10 @@ const Header = () => {
             {navItems.map((item, index) => (
               <li key={item}>
                 <button
-                  className={`text-left text-[16px] uppercase cursor-pointer transition-all duration-300 hover:scale-105 ${
-                    index === 0
-                      ? "font-bold text-[#5E7D4D]"
-                      : "font-medium text-[#FFFFFF80]"
-                  }`}
+                  className={`text-left text-[16px] uppercase cursor-pointer transition-all duration-300 hover:scale-105 ${index === 0
+                    ? "font-bold text-[#5E7D4D]"
+                    : "font-medium text-[#FFFFFF80]"
+                    }`}
                 >
                   {item}
                 </button>
