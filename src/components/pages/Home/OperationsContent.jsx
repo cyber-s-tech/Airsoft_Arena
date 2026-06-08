@@ -127,7 +127,7 @@ const OperationsContent = () => {
                         ?.source_url
                     }
                     alt={operation.title.rendered}
-                    className=" w-full h-[285px] object-cover rounded-[8px]"
+                    className=" w-full lg:h-[285px] xl:h-[285px] object-cover rounded-[8px]"
                   />
                 </div>
 

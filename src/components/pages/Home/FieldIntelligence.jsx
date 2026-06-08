@@ -29,7 +29,7 @@ const FieldIntelligence = () => {
             Field Intelligence
           </h2>
 
-          <p className="mt-6 text-white text-[16px] font-medium leading-[1.8]">
+          <p className="mt-6 text-white text-[20px] font-medium leading-[1.8]">
             Explore mission footage, community operations, tactical training
             sessions and immersive field moments captured by operators across
             the platform.
