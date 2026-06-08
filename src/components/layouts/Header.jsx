@@ -61,10 +61,14 @@ const Header = () => {
               <div className="shrink-0">
                 {/* <img src={logo} alt="Airsoft Arena" /> */}
 
-                <div className="text-[28px] font-bold leading-none text-white whitespace-nowrap cursor-pointer transition-all duration-300 hover:scale-105">
-                  <span className="text-[#5E7D4D]">AIRSOFT</span>{" "}
-                  <span>ARENA</span>
-                </div>
+                <Link
+  to="/"
+  onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+  className="text-[28px] font-bold leading-none text-white whitespace-nowrap cursor-pointer transition-all duration-300 hover:scale-105 inline-block"
+>
+  <span className="text-[#5E7D4D]">AIRSOFT</span>{" "}
+  <span>ARENA</span>
+</Link>
               </div>
 
               {/* Search */}
