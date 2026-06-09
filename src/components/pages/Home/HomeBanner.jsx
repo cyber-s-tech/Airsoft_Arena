@@ -14,7 +14,7 @@ const HomeBanner = () => {
 
       {/* Content */}
       <div className="relative z-10 max-w-[1440px] mx-auto px-5 xl:px-[80px]">
-        <div className="min-h-[850px] flex items-center">
+        <div className="min-h-[800px] flex items-center">
           {/* Content Wrapper */}
           <div className="relative max-w-[520px] py-10 pl-10">
 
