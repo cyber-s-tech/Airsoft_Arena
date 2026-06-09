@@ -19,19 +19,19 @@ const statistics = [
         id: 2,
         icon: <FaCalendarAlt />,
         title: "Upcoming Events",
-        value: "36",
+        value: "25",
     },
     {
         id: 3,
         icon: <FaShieldAlt />,
         title: "Registered Teams",
-        value: "214",
+        value: "115",
     },
     {
         id: 4,
         icon: <FaMapMarkedAlt />,
         title: "Airsoft Fields",
-        value: "87",
+        value: "45",
     },
 ];
 
