@@ -206,7 +206,18 @@ const Footer = () => {
           <div className="flex flex-col md:flex-row items-center justify-between gap-4">
             {/* Copyright */}
             <p className="text-[16px] font-medium text-[#B3B4B2] text-center md:text-left">
-              2026 AIRSOFT ARENA. All Rights Reserved.
+              <div className="text-center text-white">
+                © 2026 AIRSOFT ARENA. Designed and Developed By{" "}
+                <a
+                  href="https://ahaansoftware.com/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="font-semibold text-[#5E7D4D] hover:text-white transition-colors"
+                >
+                  Ahaan Software Consulting
+                </a>
+                . All Rights Reserved.
+              </div>
             </p>
 
             {/* Policies */}

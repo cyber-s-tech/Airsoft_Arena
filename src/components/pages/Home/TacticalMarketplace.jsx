@@ -14,41 +14,41 @@ const TacticalMarketplace = () => {
   const [activeCat, setActiveCat] = useState("all");
   const [loading, setLoading] = useState(true);
 
-useEffect(() => {
-  const fetchData = async () => {
-    try {
-      const [productRes, categoryRes, wcRes] = await Promise.all([
-        API.get("/product?_embed&per_page=50"),
-        API.get("/product_cat?per_page=50"),
-        axios.get(
-          "https://subhadeep.ahaanmedia.com/wp-json/wc/store/v1/products"
-        ),
-      ]);
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const [productRes, categoryRes, wcRes] = await Promise.all([
+          API.get("/product?_embed&per_page=50"),
+          API.get("/product_cat?per_page=50"),
+          axios.get(
+            "https://subhadeep.ahaanmedia.com/wp-json/wc/store/v1/products"
+          ),
+        ]);
 
-      const mergedProducts = productRes.data.map((wpProduct) => {
-        const wcProduct = wcRes.data.find(
-          (item) => Number(item.id) === Number(wpProduct.id)
-        );
+        const mergedProducts = productRes.data.map((wpProduct) => {
+          const wcProduct = wcRes.data.find(
+            (item) => Number(item.id) === Number(wpProduct.id)
+          );
 
-        return {
-          ...wpProduct,
-          wcProduct,
-        };
-      });
+          return {
+            ...wpProduct,
+            wcProduct,
+          };
+        });
 
-      console.log("Merged Products:", mergedProducts);
+        console.log("Merged Products:", mergedProducts);
 
-      setProducts(mergedProducts);
-      setCategories(categoryRes.data);
-    } catch (error) {
-      console.error("Fetch Error:", error);
-    } finally {
-      setLoading(false);
-    }
-  };
+        setProducts(mergedProducts);
+        setCategories(categoryRes.data);
+      } catch (error) {
+        console.error("Fetch Error:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
 
-  fetchData();
-}, []);
+    fetchData();
+  }, []);
 
   const filteredProducts =
     activeCat === "all"
@@ -82,11 +82,10 @@ useEffect(() => {
           <div className="flex min-w-max">
             <button
               onClick={() => setActiveCat("all")}
-              className={`px-5 py-3 uppercase text-sm tracking-wider rounded-[5px] transition-all ${
-                activeCat === "all"
-                  ? "bg-[#5E7D4D] text-white"
-                  : "text-[#8c8c8c] hover:text-white"
-              }`}
+              className={`px-5 py-3 uppercase text-sm tracking-wider rounded-[5px] transition-all ${activeCat === "all"
+                ? "bg-[#5E7D4D] text-white"
+                : "text-[#8c8c8c] hover:text-white"
+                }`}
             >
               All Products
             </button>
@@ -99,11 +98,10 @@ useEffect(() => {
                   onClick={() => setActiveCat(cat.id)}
                   className={`px-6.5 py-3 uppercase text-sm tracking-wider whitespace-nowrap
                               rounded-[5px] cursor-pointer transition-all duration-300
-    ${
-      activeCat === cat.id
-        ? "bg-[#5E7D4D] text-white"
-        : "text-[#8c8c8c] hover:text-white hover:bg-[#5E7D4D]/10"
-    }
+    ${activeCat === cat.id
+                      ? "bg-[#5E7D4D] text-white"
+                      : "text-[#8c8c8c] hover:text-white hover:bg-[#5E7D4D]/10"
+                    }
   `}
                 >
                   {cat.name}
@@ -202,11 +200,11 @@ useEffect(() => {
 
                           <div className="border-t border-[#1b2220] pt-3 flex items-center justify-between">
                             <div className="text-[#5E7D4D] text-[42px] font-bold">
-  {product.wcProduct?.prices?.currency_symbol || "₹"}
-  {product.wcProduct?.prices?.price
-    ? Number(product.wcProduct.prices.price) / 100
-    : 0}
-</div>
+                              {product.wcProduct?.prices?.currency_symbol || "₹"}
+                              {product.wcProduct?.prices?.price
+                                ? Number(product.wcProduct.prices.price) / 100
+                                : 0}
+                            </div>
 
                             <button
                               className=" border border-[#5d5d5d] px-8 py-4 uppercase text-white cursor-pointer transition-all
