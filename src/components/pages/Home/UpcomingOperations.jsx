@@ -20,7 +20,7 @@ const tabs = [
 const UpcomingOperations = () => {
 
   return (
-    <section className="w-full bg-[#0B0D0E] py-20 font-['Chakra_Petch']">
+    <section className="w-full bg-[#0B0D0E] py-10 font-['Chakra_Petch']">
   <div className="max-w-[1440px] mx-auto px-5 xl:px-[80px]">
     {/* HEADING */}
     <div className="max-w-[900px] mx-auto text-center">
